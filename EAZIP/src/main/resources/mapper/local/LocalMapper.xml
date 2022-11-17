@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bit.project.eazip.mapper.local.LocalMapper">
+
+<!--    <select id="selectList" resultType="bit.project.eazip.domain.home.HomeDTO">-->
+<!--        SELECT * from home1;-->
+<!--    </select>-->
+
+    <select id="selectData1" resultType="bit.project.eazip.domain.home.HomeDTO">
+        select * from home1 where idx = #{idx};
+    </select>
+
+    <select id="selectData2" resultType="bit.project.eazip.domain.home.HomeDTO">
+        select * from home2 where idx = #{idx};
+    </select>
+
+    <select id="filterPrice1" parameterType="bit.project.eazip.domain.home.FilterDTO" resultType="bit.project.eazip.domain.home.HomeDTO">
+        select * from home1 where
+        type in
+        <foreach collection="type" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+        and category1 in
+        <foreach collection="category1" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+        and room_number in
+        <foreach collection="room_number" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+        and (INSTR(addr1, #{addr1}) > 0 or INSTR(addr2, #{addr1}) > 0)
+        and ( ${op1} > 4 and ${op2} > 4  and ${op3} > 4)
+        and price <![CDATA[<=]]> ${maxprice} and price <![CDATA[>=]]> ${minprice}
+        order by ( ${op1} + ${op2} + ${op3}) desc;
+
+    </select>
+
+    <select id="filterMonthly1" parameterType="bit.project.eazip.domain.home.FilterDTO" resultType="bit.project.eazip.domain.home.HomeDTO">
+
+        select * from home1 where
+        type in
+        <foreach collection="type" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+        and category1 in
+        <foreach collection="category1" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+        and room_number in
+        <foreach collection="room_number" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+        and (INSTR(addr1, #{addr1}) > 0 or INSTR(addr2, #{addr1}) > 0)
+        and ( ${op1} > 4 and ${op2} > 4  and ${op3} > 4)
+        and price <![CDATA[<=]]> ${maxprice} and price <![CDATA[>=]]> ${minprice}
+        and (monthly = 0 or  monthly <![CDATA[<=]]> #{maxmonthly} and monthly <![CDATA[>=]]> #{minmonthly} )
+        order by ( ${op1} + ${op2} + ${op3}) desc;
+
+    </select>
+
+
+    <select id="filterPrice2" parameterType="bit.project.eazip.domain.home.FilterDTO" resultType="bit.project.eazip.domain.home.HomeDTO">
+        select * from home2 where
+        type in
+        <foreach collection="type" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+        and category1 in
+        <foreach collection="category1" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+        and room_number in
+        <foreach collection="room_number" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+        and (INSTR(addr1, #{addr1}) > 0 or INSTR(addr2, #{addr1}) > 0)
+        and ( ${op1} > 4 and ${op2} > 4  and ${op3} > 4)
+        and price <![CDATA[<=]]> ${maxprice} and price <![CDATA[>=]]> ${minprice}
+        order by ( ${op1} + ${op2} + ${op3}) desc;
+
+    </select>
+
+    <select id="filterMonthly2" parameterType="bit.project.eazip.domain.home.FilterDTO" resultType="bit.project.eazip.domain.home.HomeDTO">
+        select * from home2 where
+        type in
+        <foreach collection="type" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+        and category1 in
+        <foreach collection="category1" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+        and room_number in
+        <foreach collection="room_number" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+        and (INSTR(addr1, #{addr1}) > 0 or INSTR(addr2, #{addr1}) > 0)
+        and ( ${op1} > 4 and ${op2} > 4  and ${op3} > 4)
+        and price <![CDATA[<=]]> ${maxprice} and price <![CDATA[>=]]> ${minprice}
+        and (monthly = 0 or  monthly <![CDATA[<=]]> #{maxmonthly} and monthly <![CDATA[>=]]> #{minmonthly} )
+        order by ( ${op1} + ${op2} + ${op3}) desc;
+
+    </select>
+
+
+    <select id="onlystationComparing" parameterType="bit.project.eazip.domain.filter.StationComparingDTO" resultType="String">
+        select idx from interStationDB where
+        (
+        (station1 in
+        <foreach collection="station1" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+        and
+        station2 in
+        <foreach collection="station2" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>)
+        or
+        (station1 in
+        <foreach collection="station2" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>and
+        station2 in
+        <foreach collection="station1" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+        ))
+    </select>
+
+
+
+    <select id="stationComparing" parameterType="bit.project.eazip.domain.filter.StationComparingDTO" resultType="String">
+        select idx from interStationDB where
+        ((
+        station1 in
+        <foreach collection="station1" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+        and
+        station2 in
+        <foreach collection="station2" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>)
+        or
+        (station1 in
+        <foreach collection="station2" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>and
+        station2 in
+        <foreach collection="station1" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+        ))
+        and sectionTime <![CDATA[<=]]> #{timeSectionMax}
+        and sectionTime <![CDATA[>=]]> #{timeSectionMin}
+        and walk <![CDATA[<=]]> #{walkTimeMax}
+        and walk <![CDATA[>=]]> #{walkTimeMin}
+        and trans <![CDATA[<=]]> #{transferMax}
+        and trans <![CDATA[>=]]> #{transferMin};
+    </select>
+
+
+
+
+
+
+
+
+    <insert id="insertInterStationDB" parameterType="java.util.List">
+        INSERT ignore into interStationDB (idx, station1, station2, sectionTime, walk, trans) values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.idx}, #{item.station1}, #{item.station2}, #{item.sectionTime}, #{item.walk}, #{item.trans})
+        </foreach>;
+    </insert>
+
+
+
+
+    <insert id="insertRoomFiltering" parameterType="bit.project.eazip.domain.home.HomeDTO">
+        insert into `table`
+        select * from test0719 where type = #{type} and  price <![CDATA[<=]]> #{price} and room_number;
+    </insert>
+
+
+
+
+
+
+    <select id="filtering" resultType="bit.project.eazip.domain.home.HomeDTO">
+        select * from `table`;
+    </select>
+
+    <select id="selectIdx" resultType="bit.project.eazip.domain.home.HomeDTO">
+        select idx from test0719;
+    </select>
+
+    <insert id="insertData" parameterType="bit.project.eazip.domain.home.HomeDTO">
+        insert into `table`
+        select * from test0719 where idx = #{idx};
+    </insert>
+
+
+
+    <!--   칼럼명 변수로 할 때 : ${}    -->
+
+
+
+
+</mapper>
+
+
+
+
+
