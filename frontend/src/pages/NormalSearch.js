@@ -221,7 +221,7 @@ const NormalSearch = (onClick) => {
         "op2": options[1],
         "op3": options[2]
       },
-      baseURL: 'http://localhost:8080'
+      baseURL: 'http://15.165.179.83:8080'
     }
     ).then((response) => {
       setData(JSON.stringify(response.data));

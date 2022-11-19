@@ -17,7 +17,7 @@ import java.util.List;
 @RequestMapping("/general")
 @Log
 @RestController
-@CrossOrigin(origins = "http://localhost:3000",allowCredentials = "true")
+@CrossOrigin(origins = "http://3.39.95.33:3000",allowCredentials = "true")
 public class GeneralController {
 
     @Autowired
