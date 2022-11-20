@@ -32,7 +32,7 @@ function ReverseHeart({ Id, value }) {
           'userId': userId,
           'idx': Id,
         },
-        baseURL: 'http://localhost:8080'
+        baseURL: 'http://15.165.179.83:8080'
       })
       console.log({
         'productID': Id,
@@ -49,7 +49,7 @@ function ReverseHeart({ Id, value }) {
           'userId': userId,
           'idx': Id,
         },
-        baseURL: 'http://localhost:8080'
+        baseURL: 'http://15.165.179.83:8080'
       })
       console.log({
         'product': Id,

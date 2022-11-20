@@ -72,7 +72,7 @@ const MainHeader = () => {
                 data: {
                     "token": sessionStorage.token
                 },
-                baseURL: 'http://localhost:8080'
+                baseURL: 'http://15.165.179.83:8080'
             }
         ).then(function (response) {
             sessionStorage.clear();

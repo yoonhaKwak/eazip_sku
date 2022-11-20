@@ -99,7 +99,7 @@ const MySearchHeader = () => {
                 data: {
                     "token": sessionStorage.getItem("token")
                 },
-                baseURL: 'http://localhost:8080'
+                baseURL: 'http://15.165.179.83:8080'
             }
         ).then(function () {
             sessionStorage.clear();

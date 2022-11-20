@@ -30,7 +30,7 @@ function MyKakaoMap(data) {
             {
                 'userId': userId
             },
-            baseURL: 'http://localhost:8080'
+            baseURL: 'http://15.165.179.83:8080'
         }
         ).then((respoonse) => {
             setMarkers(respoonse.data);
